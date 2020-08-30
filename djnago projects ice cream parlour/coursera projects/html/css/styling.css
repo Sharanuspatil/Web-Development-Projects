@@ -1,0 +1,110 @@
+body {
+  margin: 1%;
+  padding: 1%;
+  background-color: silver;
+  font-size: 100%;
+  min-width: 500px;
+}
+header,
+footer {
+  background-color: blue;
+  padding: 1%;
+  margin: 1%;
+}
+header h1 {
+  font-size: 3rem;
+  color: rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+section {
+  margin: 1%;
+  padding: 1%;
+}
+
+nav a {
+  display: block;
+  background-color: white;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 35px;
+  text-decoration: none;
+  padding: 2%;
+  margin: 1%;
+}
+
+h1 {
+  text-align: center;
+  color: rgba(255, 0, 0, 0.7);
+}
+
+.myClass {
+  margin: 0em 1em;
+  padding: 0.75em;
+  border: 1px solid black;
+  border-radius: 0.25%;
+
+  /* Safari and Chrome */
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+}
+
+ol {
+  list-style: upper-roman;
+  margin: 1em;
+}
+img {
+  display: none;
+}
+
+footer {
+  clear: both;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 900px) {
+  #left {
+    display: inline-table;
+  }
+  #center {
+    width: 70%;
+    display: inline-table;
+  }
+  header h1::after {
+    content: "(I guess...)";
+  }
+  img {
+    display: inline-block;
+    margin: 10px;
+    width: 200px;
+  }
+  footer {
+    background-color: silver;
+  }
+}
+
+@media print {
+  header,
+  footer {
+    background-color: transparent;
+  }
+  nav a {
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    text-decoration: underline;
+  }
+  header h1 {
+    font-size: 1rem;
+  }
+  .myClass {
+    -webkit-column-count: auto;
+    -moz-column-count: auto;
+    column-count: auto;
+  }
+  img {
+    display: none;
+  }
+}
