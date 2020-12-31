@@ -4,8 +4,18 @@ from django.shortcuts import render
 from  .models import Product ,Contact , Orders , OrderUpdate
 import json
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import logout, authenticate, login
+
+from django.contrib.auth.decorators import login_required
+from canteen.forms import SignUpForm
+
 # Create your views here.
+
 def index(request):
+    if request.user.is_anonymous:
+        return redirect("/login") 
     allProds = []
     catprods = Product.objects.values('category', 'Food_id')
     cats = {item['category'] for item in catprods}
@@ -42,6 +52,7 @@ def search(request):
     if len(allProds) == 0 or len(query)<4:
         params = {'msg': "Please make sure to enter relevant search query"}
     return render(request, 'canteen/search.html', params)
+
 
 def about(request): 
     return render(request, 'canteen/about.html') 
@@ -86,10 +97,59 @@ def checkout(request):
        
     return render(request, 'canteen/checkout.html')
 
-    
+
 def productView(request, myid):
 
     # Fetch the product using the id
     product = Product.objects.filter(Food_id=myid)
     return render(request, 'canteen/prodView.html', {'product':product[0]})
 
+
+
+
+
+def loginUser(request):
+    if request.method=="POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print(username, password)
+
+        # check if user has entered correct credentials
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            # A backend authenticated the credentials
+            login(request, user)
+            return redirect("/")
+
+        else:
+            # No backend authenticated the credentials
+            return render(request, 'canteen/login.html')
+
+    return render(request, 'canteen/login.html')
+
+def logoutUser(request):
+    logout(request)
+    return redirect("/login")
+
+
+
+
+
+
+
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/login')
+    else:
+        form = SignUpForm()
+    return render(request, 'canteen/signup.html', {'form': form})

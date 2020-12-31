@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -41,6 +42,17 @@
           <li class="nav-item ">
             <a class="nav-link" href="/services">Services </a>
           </li>
+          
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          login/signup
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/login">Login</a>
+          <a class="dropdown-item" href="/signup">signup</a>
+          <a class="dropdown-item" href="/login">logout</a>
+        </div>
+      </li>
          
         </ul>
         <form method='get' action='search/' class="form-inline my-2 my-lg-0">
@@ -57,7 +69,8 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
       </div>
       
     </nav>
-
+    
+    welcome {{request.user}}
 
     {% block body %} {% endblock %}
 
