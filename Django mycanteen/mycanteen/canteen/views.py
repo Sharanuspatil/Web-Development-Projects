@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate, login
 
 from django.contrib.auth.decorators import login_required
-from canteen.forms import SignUpForm
+from .forms import SignUpForm
 
 # Create your views here.
 

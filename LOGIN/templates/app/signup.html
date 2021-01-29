@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Sign Up
+{% endblock %}
+
+{% block content %}
+	
+	{% if messages %}
+
+	    {% for message in messages %}
+
+		<!--Panel-->
+		<div class="card border-danger mb-3">
+		    <div class="card-header text-danger">
+		        <p class="card-title">{{ message }}</p>
+		    </div>
+		</div>
+		<!--/.Panel-->
+	    
+	    {% endfor %}
+
+	{% endif %}
+
+<div class="container mt-4">
+<div class="row">
+	<div class="col-md-4">
+		
+		<div class="list-group mt-5">
+		    <a href="{% url 'users:home' %}" class="list-group-item list-group-item-action waves-effect">Home</a>
+			{% if profile %}
+		    <a href="{% url 'profiles:profile-signup' %}" class="list-group-item bg-secondary text-white waves-effect">
+		    		Profile Sign up
+		    	{% else %}
+		    	<a href="{% url 'users:sign-up' %}" class="list-group-item bg-secondary text-white waves-effect">
+		    		Sign up
+		    {% endif %}		    	
+		    </a>
+		    <a href="{% url 'login' %}" class="list-group-item list-group-item-action waves-effect">Login</a>
+		    <a href="{% url 'users:dashboard' %}" class="list-group-item list-group-item-action waves-effect">Dashboard</a>
+		    
+		</div>
+
+	</div>
+
+		<div class="col-md-2"></div>
+
+	<div class="col-md-4">
+		<!-- Default form register -->
+		<form class="border mt-5 border-secondary text-center p-3" method="post">
+			{% csrf_token %}
+		    <p class="h4 mb-4 text-secondary text-center">Sign up</p>
+
+		    <!-- {{ form.as_p }} -->
+
+			{% for field in form %}
+		    <p>
+	        	{{ field.label_tag }}
+	        	{{ field }}
+		        <!-- {% if field.help_text %}
+		          <small style="color: grey">{{ field.help_text }}</small>
+		        {% endif %} -->
+		        {% for error in field.errors %}
+		          <p style="color: red">{{ error }}</p>
+		        {% endfor %}
+		    </p>
+		    {% endfor %}
+
+		    <!-- Sign up button -->
+		    <button class="btn btn-secondary my-4 btn-block" type="submit">Sign up</button>
+
+		    <!-- Social register -->
+		    <p>or sign up with:</p>
+
+		    <a type="button" class="light-blue-text mx-2">
+		        <i class="fa fa-facebook"></i>
+		    </a>
+		    <a type="button" class="light-blue-text mx-2">
+		        <i class="fa fa-twitter"></i>
+		    </a>
+		    <a type="button" class="light-blue-text mx-2">
+		        <i class="fa fa-linkedin"></i>
+		    </a>
+		    <a type="button" class="light-blue-text mx-2">
+		        <i class="fa fa-github"></i>
+		    </a>
+
+		    <hr>
+
+		    <!-- Terms of service -->
+		    <p>By clicking
+		        <em>Sign up</em> you agree to our
+		        <a href="" target="_blank">terms of service</a>
+		    </p>
+		</form>
+		<!-- Default form register -->
+	</div>
+
+	<div class="col-md-2"></div>
+
+</div>
+</div>
+
+{% block script %}
+<script type="text/javascript">
+	function get_ip(json) {
+		$("#id_location").val(json.ip);
+	}
+</script>
+
+<script src="https://api.ipify.org?format=jsonp&callback=get_ip"></script>
+{% endblock %}
+
+{% endblock %}

@@ -44,7 +44,7 @@ pasdding-right: 0;
 <div class="container">
     <!--Slideshow starts here -->
     {% for Product, range, nSlides in allProds %}
-    <h5 class="my-4">Flash Sale On {{Product.0.category}} - Recommended Items</h5>
+    <h5 class="my-4">Category: {{Product.0.category}}</h5>
     <div class="row">
         <div id="demo{{forloop.counter}}" class="col carousel slide my-3"
             data-ride="carousel">

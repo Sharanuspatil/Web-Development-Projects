@@ -3,7 +3,8 @@ import base64
 import string
 import random
 import hashlib
-
+import django.utils.crypto
+import crypto
 from Crypto.Cipher import AES
 
 
