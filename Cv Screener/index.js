@@ -1,5 +1,4 @@
-console.log("This is my index.js");
-// Data is an array of objects which contains information about the candidates
+
 const data = [
     {
         name: 'Rohan Das',
